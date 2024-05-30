@@ -1,0 +1,58 @@
+{
+  "endpoints": {
+    "/general/parameterless": {
+      "get": "from petstore import Petstore, Environment\n\nsdk = Petstore(\n    access_token=\"YOUR_ACCESS_TOKEN\",\n    base_url=Environment.DEFAULT.value\n)\n\nresult = sdk.general.get_parameterless()\n\nprint(result)\n"
+    },
+    "/general/only-primitives": {
+      "get": "from petstore import Petstore, Environment\n\nsdk = Petstore(\n    access_token=\"YOUR_ACCESS_TOKEN\",\n    base_url=Environment.DEFAULT.value\n)\n\nresult = sdk.general.get_only_primitives(\n    int_param=8,\n    string_param=\"stringParam\",\n    number_param=2.44,\n    bool_param=True,\n    deprecated_required_param=8,\n    deprecated_optional_param=2\n)\n\nprint(result)\n"
+    },
+    "/general/model-and-primitives": {
+      "get": "from petstore import Petstore, Environment\nfrom petstore.models import Person\n\nsdk = Petstore(\n    access_token=\"YOUR_ACCESS_TOKEN\",\n    base_url=Environment.DEFAULT.value\n)\nperson_param=Person(\n    first_name=\"firstName\",\n    last_name=\"lastName\",\n    accepted_terms=True,\n    age=7,\n    address={\n        \"street\": \"street\",\n        \"city\": \"city\",\n        \"number\": \"number\",\n        \"state\": \"CA\"\n    },\n    required_deprecated=1\n)\n\nresult = sdk.general.get_model_and_primitives(\n    int_param=3,\n    person_param=person_param\n)\n\nprint(result)\n",
+      "post": "from petstore import Petstore, Environment\nfrom petstore.models import Person\n\nsdk = Petstore(\n    access_token=\"YOUR_ACCESS_TOKEN\",\n    base_url=Environment.DEFAULT.value\n)\n\nrequest_body = Person(\n    first_name=\"firstName\",\n    last_name=\"lastName\",\n    accepted_terms=True,\n    age=7,\n    address={\n        \"street\": \"street\",\n        \"city\": \"city\",\n        \"number\": \"number\",\n        \"state\": \"CA\"\n    },\n    required_deprecated=1\n)\n\nresult = sdk.general.post_model_and_primitives(\n    request_body=request_body,\n    int_param=2\n)\n\nprint(result)\n"
+    },
+    "/general/arrays-of-primitives": {
+      "get": "from petstore import Petstore, Environment\n\nsdk = Petstore(\n    access_token=\"YOUR_ACCESS_TOKEN\",\n    base_url=Environment.DEFAULT.value\n)\nint_array_param=[\n    8\n]\nstring_array_param=[\n    \"stringArrayParam\"\n]\nnumber_array_param=[\n    1.18\n]\nboolean_array_param=[\n    False\n]\n\nresult = sdk.general.get_arrays_of_primitives(\n    int_array_param=int_array_param,\n    string_array_param=string_array_param,\n    number_array_param=number_array_param,\n    boolean_array_param=boolean_array_param\n)\n\nprint(result)\n"
+    },
+    "/general/array-of-models": {
+      "get": "from petstore import Petstore, Environment\n\nsdk = Petstore(\n    access_token=\"YOUR_ACCESS_TOKEN\",\n    base_url=Environment.DEFAULT.value\n)\nperson_array=[\n    {\n        \"first_name\": \"firstName\",\n        \"last_name\": \"lastName\",\n        \"accepted_terms\": True,\n        \"age\": 7,\n        \"address\": {\n            \"street\": \"street\",\n            \"city\": \"city\",\n            \"number\": \"number\",\n            \"state\": \"CA\"\n        },\n        \"required_deprecated\": 1\n    }\n]\n\nresult = sdk.general.get_array_of_models(person_array=person_array)\n\nprint(result)\n"
+    },
+    "/general/one-of": {
+      "get": "from petstore import Petstore, Environment\nfrom petstore.models.car_or_person import Car\n\nsdk = Petstore(\n    access_token=\"YOUR_ACCESS_TOKEN\",\n    base_url=Environment.DEFAULT.value\n)\ncar_or_person_param=Car(\n    brand_name=\"brandName\",\n    model_name=\"modelName\",\n    year=8\n)\n\nresult = sdk.general.get_one_of(car_or_person_param=car_or_person_param)\n\nprint(result)\n"
+    },
+    "/validation/primitives": {
+      "get": "from petstore import Petstore, Environment\n\nsdk = Petstore(\n    access_token=\"YOUR_ACCESS_TOKEN\",\n    base_url=Environment.DEFAULT.value\n)\n\nresult = sdk.validation.get_primitives(\n    min_max_integer=-1,\n    min_max_number=0.41,\n    min_max_length_string=\"sit fug\",\n    string_with_pattern=\"ZSKA10@i.8EwXQafpHm6.p0a1Qf.kOU_dOJBIm3.5GKO.HdT8hVl-YQT.N9m5OhS4m.C.le.tjs.MJ.vVO\",\n    description_in_schema=\"Amazing\",\n    description_in_parameter_and_schema=\"Amazing\"\n)\n\nprint(result)\n"
+    },
+    "/request-input/strings": {
+      "post": "from petstore import Petstore, Environment\n\nsdk = Petstore(\n    access_token=\"YOUR_ACCESS_TOKEN\",\n    base_url=Environment.DEFAULT.value\n)\n\nwith open(\"file.ext\", \"r\") as f:\n    request_body = f.read()\n\nresult = sdk.request_input.post_strings(request_body=request_body)\n\nprint(result)\n"
+    },
+    "/request-input/integer": {
+      "post": "from petstore import Petstore, Environment\n\nsdk = Petstore(\n    access_token=\"YOUR_ACCESS_TOKEN\",\n    base_url=Environment.DEFAULT.value\n)\n\nrequest_body = 3\n\nresult = sdk.request_input.post_integer(request_body=request_body)\n\nprint(result)\n"
+    },
+    "/request-input/boolean": {
+      "post": "from petstore import Petstore, Environment\n\nsdk = Petstore(\n    access_token=\"YOUR_ACCESS_TOKEN\",\n    base_url=Environment.DEFAULT.value\n)\n\nrequest_body = False\n\nresult = sdk.request_input.post_boolean(request_body=request_body)\n\nprint(result)\n"
+    },
+    "/request-input/array": {
+      "post": "from petstore import Petstore, Environment\n\nsdk = Petstore(\n    access_token=\"YOUR_ACCESS_TOKEN\",\n    base_url=Environment.DEFAULT.value\n)\n\nrequest_body = [\n    \"do sint\"\n]\n\nresult = sdk.request_input.post_array_of_primitives(request_body=request_body)\n\nprint(result)\n",
+      "put": "from petstore import Petstore, Environment\n\nsdk = Petstore(\n    access_token=\"YOUR_ACCESS_TOKEN\",\n    base_url=Environment.DEFAULT.value\n)\n\nrequest_body = [\n    {\n        \"first_name\": \"firstName\",\n        \"last_name\": \"lastName\",\n        \"accepted_terms\": True,\n        \"age\": 7,\n        \"address\": {\n            \"street\": \"street\",\n            \"city\": \"city\",\n            \"number\": \"number\",\n            \"state\": \"CA\"\n        },\n        \"required_deprecated\": 1\n    }\n]\n\nresult = sdk.request_input.post_array_of_objects(request_body=request_body)\n\nprint(result)\n"
+    },
+    "/misc/no-response-body": {
+      "get": "from petstore import Petstore, Environment\n\nsdk = Petstore(\n    access_token=\"YOUR_ACCESS_TOKEN\",\n    base_url=Environment.DEFAULT.value\n)\n\nresult = sdk.misc.get_parameterless_with_no_response()\n\nprint(result)\n"
+    },
+    "/misc/optional-parameters": {
+      "get": "from petstore import Petstore, Environment\n\nsdk = Petstore(\n    access_token=\"YOUR_ACCESS_TOKEN\",\n    base_url=Environment.DEFAULT.value\n)\n\nresult = sdk.misc.get_optional_parameters(\n    optional_int_param=8,\n    optional_string_param=\"optionalStringParam\",\n    optional_number_param=9.45,\n    optional_bool_param=True\n)\n\nprint(result)\n"
+    },
+    "/misc/circular-reference": {
+      "post": "from petstore import Petstore, Environment\nfrom petstore.models import CircularReferenceTestModel\n\nsdk = Petstore(\n    access_token=\"YOUR_ACCESS_TOKEN\",\n    base_url=Environment.DEFAULT.value\n)\n\nrequest_body = CircularReferenceTestModel(\n    leaf_node={\n        \"name\": \"name\",\n        \"next\": {\n            \"name\": \"name\",\n            \"previous\": {\n                \"name\": \"name\",\n                \"other_children\": [\n                    {\n                        \"name\": \"name\"\n                    }\n                ]\n            },\n            \"other_children\": [\n                {\n                    \"name\": \"name\",\n                    \"previous\": {\n                        \"name\": \"name\"\n                    }\n                }\n            ]\n        },\n        \"previous\": {\n            \"name\": \"name\",\n            \"next\": {\n                \"name\": \"name\",\n                \"other_children\": [\n                    {\n                        \"name\": \"name\"\n                    }\n                ]\n            },\n            \"other_children\": [\n                {\n                    \"name\": \"name\",\n                    \"next\": {\n                        \"name\": \"name\"\n                    }\n                }\n            ]\n        },\n        \"other_children\": [\n            {\n                \"name\": \"name\",\n                \"next\": {\n                    \"name\": \"name\",\n                    \"previous\": {\n                        \"name\": \"name\"\n                    }\n                },\n                \"previous\": {\n                    \"name\": \"name\",\n                    \"next\": {\n                        \"name\": \"name\"\n                    }\n                }\n            }\n        ]\n    },\n    home_address={\n        \"street\": \"street\",\n        \"city\": \"city\",\n        \"number\": \"number\",\n        \"state\": \"CA\"\n    },\n    work_address={\n        \"street\": \"street\",\n        \"city\": \"city\",\n        \"number\": \"number\",\n        \"state\": \"CA\"\n    }\n)\n\nresult = sdk.misc.post_circular_reference(request_body=request_body)\n\nprint(result)\n"
+    }
+  },
+  "environments": {
+    "availableEnvironments": "production = \"https://api.liblab.com\"\nstaging = \"https://api-staging.liblab.com\"\ndevelopment = \"https://api-dev.liblab.com\"",
+    "setEnvironment": "from petstore import Environment\n\nsdk.set_base_url(Environment.production.value)"
+  },
+  "authentication": {
+    "bearer": {
+      "constructor": "Petstore(\n    access_token=\"YOUR_ACCESS_TOKEN\"\n)",
+      "setter": "sdk.set_access_token(\"YOUR_ACCESS_TOKEN\")"
+    }
+  }
+}
