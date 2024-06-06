@@ -10,11 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v3
-        with:
-          node-version: "lts"
-
       - name: Check to hub main repo
         uses: actions/checkout@master
         with:
