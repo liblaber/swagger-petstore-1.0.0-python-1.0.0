@@ -1,0 +1,29 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main repo
+        uses: actions/checkout@v2
+
+      - name: Checkout liblaber/hub repo
+        uses: actions/checkout@v2
+        with:
+          repository: liblaber/hub
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Change directory to server
+        run: cd server
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build:ci -- --source='{"REPO_URL":"https://github.com/liblaber/test-documentation-repo","PACKAGE_MANAGER":"PYPI","PACKAGE_MANAGER_URL":"https://pypi.org","COMPANY_SLUG":"swagger","API_SLUG":"petstore","LANGUAGE":"python","API_VERSION":"1.0.0","SDK_VERSION":"1.0.0","API_NAME":"petstore","COMPANY_NAME":"swagger","REPO_NAME":"test-documentation-repo","COMMIT_SHA":"cbb01d9dc225615c8a78fb6ca0ec8c2d9e41f493"}'
