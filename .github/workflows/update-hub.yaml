@@ -10,15 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout main repo
-        uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts"
 
-      - name: Checkout liblaber/hub repo
-        uses: actions/checkout@v2
+      - name: Check to hub main repo
+        uses: actions/checkout@master
         with:
           repository: liblaber/hub
-          ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
+          ref: refs/heads/main
 
       - name: Change directory to server
         run: cd server
