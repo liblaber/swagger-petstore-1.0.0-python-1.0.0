@@ -17,6 +17,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: liblaber/hub
+          ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Change directory to server
