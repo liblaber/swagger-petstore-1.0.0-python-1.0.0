@@ -14,6 +14,7 @@ jobs:
           TARGET_WORKFLOW: "update-static-assets.yaml"
           TARGET_BRANCH: "main"
         run: |
+          echo  https://api.github.com/repos/$TARGET_REPO/actions/workflows/$TARGET_WORKFLOW/dispatches && 
           response=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: token ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
