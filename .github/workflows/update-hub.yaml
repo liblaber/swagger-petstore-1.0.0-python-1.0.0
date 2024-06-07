@@ -1,10 +1,8 @@
 name: Update github
-
 on:
   push:
     branches:
       - main
-
 jobs:
   trigger-other-workflow:
     runs-on: ubuntu-latest
@@ -13,13 +11,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TARGET_REPO: "liblaber/hub"
-          TARGET_WORKFLOW: "update-static-assets.yml"
+          TARGET_WORKFLOW: "update-static-assets.yaml"
           TARGET_BRANCH: "main"
         run: |
-          curl -X POST \
+          response=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: token ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
             https://api.github.com/repos/$TARGET_REPO/actions/workflows/$TARGET_WORKFLOW/dispatches \
-            -d '{"ref":"$TARGET_BRANCH"}'
-
-  # uses: liblaber/hub/.github/workflows/update-static-assets.yaml@main
+            -d '{"ref":"'$TARGET_BRANCH'"}')
+          if [[ $response != 2* ]]; then
+            echo "Request failed with status code $response"
+            exit 1
+          else
+            echo "Workflow dispatch successful with status code $response"
+          fi
