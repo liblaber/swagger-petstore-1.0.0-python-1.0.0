@@ -9,7 +9,7 @@ jobs:
   # call-workflow-passing-data:
   #   uses: liblaber/shared-github-workflows/.github/workflows/limit-pr-size.yml@main
   #   secrets: inherit
-  call-workflow-passing-data:
+  build-static-assets:
     uses: liblaber/hub/.github/workflows/update-static-assets.yaml@main
     secrets: inherit
     # liblaber/hub/.github/workflows/update-static-assets.yaml@main
