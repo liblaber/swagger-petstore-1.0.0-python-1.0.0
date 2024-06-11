@@ -1,24 +1,57 @@
-name: Update github
+name: Dispatch Event
+
 on:
   push:
     branches:
       - main
+
 jobs:
-  trigger-other-workflow:
+  dispatch_event:
     runs-on: ubuntu-latest
     steps:
-      - name: Update static asset for sdk
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Trigger Dispatch Event
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TARGET_REPO: "hub"
-          TARGET_OWNER: "liblaber"
-          TARGET_WORKFLOW: "update-static-assets.yaml"
-          TARGET_BRANCH: "main"
+          REPO_URL: ${{ github.repository }}
+          PACKAGE_MANAGER: "PYPI"
+          PACKAGE_MANAGER_URL: "https://pypi.org"
+          COMPANY_SLUG: "swagger"
+          API_SLUG: "petstore"
+          LANGUAGE: "python"
+          API_VERSION: "1.0.0"
+          SDK_VERSION: "1.0.0"
+          API_NAME: "petstore"
+          COMPANY_NAME: "swagger"
+          REPO_NAME: ${{ github.event.repository.name }}
+          AUTHOR_NAME: ${{ github.actor }} # Assuming you want the username of the person who triggered the event
+          PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          AUTHOR_EMAIL: ${{ steps.commit_info.outputs.email }}
+
         run: |
-          curl -L \
-          -X POST \
-          -H "Accept: application/vnd.github+json" \
-          -H "Authorization: token ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
-          -H "X-GitHub-Api-Version: 2022-11-28" \
-          https://api.github.com/repos/$TARGET_OWNER/$TARGET_REPO/actions/workflows/$TARGET_WORKFLOW/dispatches \
-          -d '{"ref":"topic-branch","inputs":{"name":"Mona the Octocat","home":"San Francisco, CA"}}'
+          curl --location 'https://api.github.com/repos/liblaber/hub/dispatches' \
+          --header 'Accept: application/vnd.github.everest-preview+json' \
+          --header 'Content-Type: application/json' \
+          --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --data '{
+            "event_type": "update-static-assets",
+            "client_payload": {
+              "args": {
+                "REPO_URL": "'"$REPO_URL"'",
+                "PACKAGE_MANAGER": "'"$PACKAGE_MANAGER"'",
+                "PACKAGE_MANAGER_URL": "'"$PACKAGE_MANAGER_URL"'",
+                "COMPANY_SLUG": "'"$COMPANY_SLUG"'",
+                "API_SLUG": "'"$API_SLUG"'",
+                "LANGUAGE": "'"$LANGUAGE"'",
+                "API_VERSION": "'"$API_VERSION"'",
+                "SDK_VERSION": "'"$SDK_VERSION"'",
+                "API_NAME": "'"$API_NAME"'",
+                "COMPANY_NAME": "'"$COMPANY_NAME"'",
+                "REPO_NAME": "'"$REPO_NAME"'",
+                "AUTHOR_NAME": "'"$AUTHOR_NAME"'",
+                "PASSWORD": "'"$PASSWORD"'",
+                "AUTHOR_EMAIL": "'"$AUTHOR_EMAIL"'"
+              }
+            }
+          }'
