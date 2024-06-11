@@ -17,25 +17,11 @@ jobs:
           AUTHOR_NAME="${{ github.event.head_commit.author.name }}"
           AUTHOR_EMAIL="${{ github.event.head_commit.author.email }}"
 
-          BUILD_ARGS=$(jq -n --arg repo_url "$REPO_URL" \
-                              --arg package_manager "PYPI" \
-                              --arg package_manager_url "https://pypi.org" \
-                              --arg company_slug "swagger" \
-                              --arg api_slug "petstore" \
-                              --arg language "python" \
-                              --arg api_version "1.0.0" \
-                              --arg sdk_version "1.0.0" \
-                              --arg api_name "petstore" \
-                              --arg company_name "swagger" \
-                              --arg repo_name "$REPO_NAME" \
-                              --arg author_name "$AUTHOR_NAME" \
-                              --arg author_email "$AUTHOR_EMAIL" \
-                              --arg password "${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
-                              '{"REPO_URL": $repo_url, "PACKAGE_MANAGER": $package_manager, "PACKAGE_MANAGER_URL": $package_manager_url, "COMPANY_SLUG": $company_slug, "API_SLUG": $api_slug, "LANGUAGE": $language, "API_VERSION": $api_version, "SDK_VERSION": $sdk_version, "API_NAME": $api_name, "COMPANY_NAME": $company_name, "REPO_NAME": $repo_name, "AUTHOR_NAME": $author_name, "AUTHOR_EMAIL": $author_email, "PASSWORD": $password}')
+          BUILD_ARGS="{\"REPO_URL\":\"$REPO_URL\",\"PACKAGE_MANAGER\":\"PYPI\",\"PACKAGE_MANAGER_URL\":\"https://pypi.org\",\"COMPANY_SLUG\":\"swagger\",\"API_SLUG\":\"petstore\",\"LANGUAGE\":\"python\",\"API_VERSION\":\"1.0.0\",\"SDK_VERSION\":\"1.0.0\",\"API_NAME\":\"petstore\",\"COMPANY_NAME\":\"swagger\",\"REPO_NAME\":\"$REPO_NAME\",\"AUTHOR_NAME\":\"$AUTHOR_NAME\",\"AUTHOR_EMAIL\":\"$AUTHOR_EMAIL\",\"PASSWORD\":\"${{ secrets.PERSONAL_ACCESS_TOKEN }}\"}"
 
           curl -X POST \
             -H "Authorization: Bearer ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             -H "Content-Type: application/json" \
             https://api.github.com/repos/liblaber/hub/actions/workflows/101615628/dispatches \
-            --data "{\"ref\":\"main\",\"inputs\":{\"buildArgs\":\"$(echo "$BUILD_ARGS" | jq -c .)\"}}"
+            --data "{\"ref\":\"main\",\"inputs\":{\"buildArgs\":\"$BUILD_ARGS\"}}"
