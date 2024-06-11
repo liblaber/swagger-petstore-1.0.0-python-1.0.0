@@ -31,11 +31,11 @@ jobs:
                               --arg author_name "$AUTHOR_NAME" \
                               --arg author_email "$AUTHOR_EMAIL" \
                               --arg password "${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
-                              '{REPO_URL: $repo_url, PACKAGE_MANAGER: $package_manager, PACKAGE_MANAGER_URL: $package_manager_url, COMPANY_SLUG: $company_slug, API_SLUG: $api_slug, LANGUAGE: $language, API_VERSION: $api_version, SDK_VERSION: $sdk_version, API_NAME: $api_name, COMPANY_NAME: $company_name, REPO_NAME: $repo_name, AUTHOR_NAME: $author_name, AUTHOR_EMAIL: $author_email, PASSWORD: $password}')
+                              '{"REPO_URL": $repo_url, "PACKAGE_MANAGER": $package_manager, "PACKAGE_MANAGER_URL": $package_manager_url, "COMPANY_SLUG": $company_slug, "API_SLUG": $api_slug, "LANGUAGE": $language, "API_VERSION": $api_version, "SDK_VERSION": $sdk_version, "API_NAME": $api_name, "COMPANY_NAME": $company_name, "REPO_NAME": $repo_name, "AUTHOR_NAME": $author_name, "AUTHOR_EMAIL": $author_email, "PASSWORD": $password}')
 
           curl -X POST \
             -H "Authorization: Bearer ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             -H "Content-Type: application/json" \
             https://api.github.com/repos/liblaber/hub/actions/workflows/101615628/dispatches \
-            --data "{\"ref\":\"main\",\"inputs\":{\"buildArgs\":$BUILD_ARGS}}"
+            --data "{\"ref\":\"main\",\"inputs\":{\"buildArgs\":\"$BUILD_ARGS\"}}"
