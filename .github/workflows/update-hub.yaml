@@ -12,6 +12,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Get Commit Info
+        id: commit_info
+        run: |
+          COMMIT_EMAIL=$(git log -1 --pretty=format:'%ae')
+          echo "email=${COMMIT_EMAIL}" >> $GITHUB_ENV
+
       - name: Trigger Dispatch Event
         env:
           REPO_URL: ${{ github.repository }}
@@ -25,12 +31,13 @@ jobs:
           API_NAME: "petstore"
           COMPANY_NAME: "swagger"
           REPO_NAME: ${{ github.event.repository.name }}
-          AUTHOR_NAME: ${{ github.actor }} # Assuming you want the username of the person who triggered the event
+          AUTHOR_NAME: ${{ github.actor }}
           PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-          AUTHOR_EMAIL: ${{ steps.commit_info.outputs.email }}
+          AUTHOR_EMAIL: ${{ env.email }}
 
         run: |
           curl --location 'https://api.github.com/repos/liblaber/hub/dispatches' \
+          -X POST \
           --header 'Accept: application/vnd.github.everest-preview+json' \
           --header 'Content-Type: application/json' \
           --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
