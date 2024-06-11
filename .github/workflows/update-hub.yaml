@@ -17,7 +17,7 @@ jobs:
           AUTHOR_NAME="${{ github.event.head_commit.author.name }}"
           AUTHOR_EMAIL="${{ github.event.head_commit.author.email }}"
 
-          curl -X POST \
+          curl --fail -X POST \
             -H "Authorization: Bearer ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             -H "Content-Type: application/json" \
