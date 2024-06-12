@@ -14,12 +14,12 @@ jobs:
         run: |
           REPO_URL="https://github.com/${{ github.repository }}"
           REPO_NAME="${{ github.event.repository.name }}"
-          AUTHOR_NAME="${{ github.event.head_commit.author.name }}"
+          ACTOR_NAME="${{ github.actor }}"
           AUTHOR_EMAIL="${{ github.event.head_commit.author.email }}"
 
           curl --fail -X POST \
             -H "Authorization: Bearer ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             -H "Content-Type: application/json" \
-            -d '{"ref":"main","inputs":{"buildArgs":"{\"REPO_URL\":\"'$REPO_URL'\",\"PACKAGE_MANAGER\":\"PYPI\",\"PACKAGE_MANAGER_URL\":\"https://pypi.org\",\"COMPANY_SLUG\":\"swagger\",\"API_SLUG\":\"petstore\",\"LANGUAGE\":\"python\",\"API_VERSION\":\"1.0.0\",\"SDK_VERSION\":\"1.0.0\",\"API_NAME\":\"petstore\",\"COMPANY_NAME\":\"swagger\",\"REPO_NAME\":\"'$REPO_NAME'\",\"AUTHOR_NAME\":\"'$AUTHOR_NAME'\",\"PASSWORD\":\"${{ secrets.PERSONAL_ACCESS_TOKEN }}\",\"AUTHOR_EMAIL\":\"'$AUTHOR_EMAIL'\"}"}}' \
+            -d '{"ref":"main","inputs":{"buildArgs":"{\"REPO_URL\":\"'$REPO_URL'\",\"PACKAGE_MANAGER\":\"PYPI\",\"PACKAGE_MANAGER_URL\":\"https://pypi.org\",\"COMPANY_SLUG\":\"swagger\",\"API_SLUG\":\"petstore\",\"LANGUAGE\":\"python\",\"API_VERSION\":\"1.0.0\",\"SDK_VERSION\":\"1.0.0\",\"API_NAME\":\"petstore\",\"COMPANY_NAME\":\"swagger\",\"REPO_NAME\":\"'$REPO_NAME'\",\"AUTHOR_NAME\":\"'$ACTOR_NAME'\",\"PASSWORD\":\"${{ secrets.PERSONAL_ACCESS_TOKEN }}\",\"AUTHOR_EMAIL\":\"'$AUTHOR_EMAIL'\"}"}}' \
             https://api.github.com/repos/liblaber/hub/actions/workflows/101615628/dispatches
