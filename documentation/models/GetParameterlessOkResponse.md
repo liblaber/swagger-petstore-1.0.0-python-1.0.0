@@ -6,4 +6,4 @@
 | :----- | :--- | :------- | :---------- |
 | status | str  | ❌       |             |
 
-show text inCICD
+show text inCICD after ci builder update
