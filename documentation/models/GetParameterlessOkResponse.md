@@ -6,4 +6,4 @@
 | :----- | :--- | :------- | :---------- |
 | status | str  | ❌       |             |
 
-test text 
+show text inCICD
