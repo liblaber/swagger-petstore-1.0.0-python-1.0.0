@@ -12,6 +12,7 @@ A list of all methods in the `GeneralService` service. Click on the method name 
 | [get_array_of_models](#get_array_of_models)             |                                     |
 | [get_one_of](#get_one_of)                               | One of complex models endpoint      |
 
+
 ## get_parameterless
 
 - HTTP Method: `GET`
