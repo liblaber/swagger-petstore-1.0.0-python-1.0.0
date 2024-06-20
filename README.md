@@ -1,4 +1,4 @@
-# TestSdk Python SDK 1.0.0
+# Swagger petstore Python SDK 1.0.0
 
 Welcome to the TestSdk SDK documentation. This guide will help you get started with integrating and using the TestSdk SDK in your project.
 
