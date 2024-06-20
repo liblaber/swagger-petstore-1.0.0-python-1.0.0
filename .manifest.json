@@ -1,0 +1,157 @@
+{
+  "liblabVersion": "2.1.17",
+  "date": "2024-06-20T20:17:34.818Z",
+  "config": {
+    "apiId": 222,
+    "sdkName": "test-sdk",
+    "sdkVersion": "1.0.0",
+    "liblabVersion": "2",
+    "deliveryMethods": ["zip"],
+    "languages": ["python"],
+    "apiVersion": "1.0.0",
+    "apiName": "test-api",
+    "specFilePath": "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.json",
+    "auth": ["bearer"],
+    "languageOptions": {
+      "csharp": {
+        "packageId": "",
+        "githubRepoName": "",
+        "ignoreFiles": [],
+        "liblabVersion": "2",
+        "sdkVersion": "1.0.0"
+      },
+      "go": {
+        "goModuleName": "github.com/swagger-api/swagger-petstore",
+        "githubRepoName": "",
+        "ignoreFiles": [],
+        "liblabVersion": "2",
+        "sdkVersion": "1.0.0"
+      },
+      "python": {
+        "alwaysInitializeOptionals": false,
+        "pypiPackageName": "",
+        "githubRepoName": "",
+        "ignoreFiles": [],
+        "liblabVersion": "2",
+        "sdkVersion": "1.0.0"
+      },
+      "typescript": {
+        "bundle": false,
+        "exportClassDefault": false,
+        "httpClient": "axios",
+        "npmName": "",
+        "npmOrg": "",
+        "githubRepoName": "",
+        "ignoreFiles": [],
+        "liblabVersion": "1",
+        "sdkVersion": "1.0.0"
+      }
+    },
+    "publishing": {
+      "githubOrg": ""
+    },
+    "authentication": {
+      "access": {
+        "prefix": "Bearer"
+      }
+    },
+    "devContainer": false,
+    "generateEnv": true,
+    "includeOptionalSnippetParameters": true,
+    "inferServiceNames": false,
+    "injectedModels": [],
+    "license": {
+      "type": "MIT",
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT",
+      "path": "MIT.ejs"
+    },
+    "responseHeaders": false,
+    "retry": {
+      "enabled": true,
+      "maxAttempts": 3,
+      "retryDelay": 150,
+      "maxDelay": 5000,
+      "retryDelayJitter": 50,
+      "backOffFactor": 2,
+      "httpCodesToRetry": [408, 429, 500, 502, 503, 504],
+      "httpMethodsToRetry": ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"]
+    },
+    "multiTenant": true,
+    "specUrl": "https://dev-liblab-api-stack-specs.s3.us-east-1.amazonaws.com/222/open-api-spec.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA3C2RXH7MWUCMN7ON%2F20240620%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240620T201734Z&X-Amz-Expires=43200&X-Amz-Signature=c33de7a31bcea991b79da57d3673dff19e05c5e4f79d5e1abb7e1498ea3a348b&X-Amz-SignedHeaders=host&x-id=GetObject",
+    "includeWatermark": true,
+    "alwaysInitializeOptionals": false,
+    "pypiPackageName": "",
+    "githubRepoName": "",
+    "ignoreFiles": [],
+    "language": "python",
+    "deliveryMethod": "zip",
+    "hooks": {
+      "enabled": false,
+      "sourceDir": ""
+    },
+    "usesFormData": false,
+    "environmentVariables": [],
+    "fileOutput": "/tmp",
+    "httpLibrary": {
+      "name": "axios",
+      "packages": {
+        "axios": "^1.6.8"
+      },
+      "languages": ["typescript"]
+    },
+    "customQueries": {
+      "paths": [],
+      "rawQueries": [],
+      "queriesData": []
+    }
+  },
+  "files": [
+    "src/test_sdk/models/base.py",
+    "src/test_sdk/models/utils/json_map.py",
+    "src/test_sdk/models/__init__.py",
+    "src/test_sdk/services/__init__.py",
+    "src/test_sdk/__init__.py",
+    "src/test_sdk/net/__init__.py",
+    "src/test_sdk/net/headers/__init__.py",
+    "src/test_sdk/net/transport/__init__.py",
+    "src/test_sdk/hooks/__init__.py",
+    "src/test_sdk/net/environment/__init__.py",
+    "src/test_sdk/net/request_chain/__init__.py",
+    "src/test_sdk/net/request_chain/handlers/__init__.py",
+    "src/test_sdk/net/transport/request.py",
+    "src/test_sdk/net/transport/response.py",
+    "src/test_sdk/net/transport/request_error.py",
+    "src/test_sdk/sdk.py",
+    "src/test_sdk/net/transport/serializer.py",
+    "src/test_sdk/services/utils/validator.py",
+    "src/test_sdk/services/utils/base_service.py",
+    "pyproject.toml",
+    ".gitignore",
+    "src/test_sdk/models/utils/cast_models.py",
+    "src/test_sdk/net/transport/utils.py",
+    "src/test_sdk/hooks/hook.py",
+    "install.sh",
+    "install.cmd",
+    "examples/install.sh",
+    "examples/install.cmd",
+    "src/test_sdk/net/headers/base_header.py",
+    "src/test_sdk/net/headers/access_token_auth.py",
+    "src/test_sdk/net/environment/environment.py",
+    "src/test_sdk/net/request_chain/request_chain.py",
+    "src/test_sdk/net/request_chain/handlers/base_handler.py",
+    "src/test_sdk/net/request_chain/handlers/http_handler.py",
+    "src/test_sdk/net/request_chain/handlers/hook_handler.py",
+    "src/test_sdk/net/request_chain/handlers/retry_handler.py",
+    "examples/sample.py",
+    ".env.example",
+    "/examples/.env.example",
+    "src/test_sdk/services/utils/default_headers.py",
+    "./LICENSE",
+    "documentation/models/Pet.md",
+    "src/test_sdk/models/pet.py",
+    "documentation/services/PetsService.md",
+    "src/test_sdk/services/pets.py",
+    "README.md"
+  ]
+}
